@@ -1,6 +1,6 @@
 # ETL-project
 
-This project's purpose is to work with a partner to find multiple datasets or data sources and load them together for future analysis. We (Sarah & Paul) are interested in health patterns across the US, so this interest guided our search. 
+This project's purpose is to work with a partner to find multiple datasets or data sources and load them together for future analysis. We (Sarah & Paul) adiscovered a shared interest in understanding health patterns across the US, so this interest guided our search. 
 
 ## Load Mortality Data
 
