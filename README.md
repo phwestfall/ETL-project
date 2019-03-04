@@ -1,5 +1,4 @@
 # ETL-project
----
 This project's purpose is to work with a partner to find multiple datasets or data sources and load them together for future analysis. We (Sarah & Paul) adiscovered a shared interest in understanding health patterns across the US, so this interest guided our search. 
 
 
@@ -7,7 +6,7 @@ This project's purpose is to work with a partner to find multiple datasets or da
 The goal of the ETL project is to create a universal database of census identifiers to make merging between disparate datasets with different census geographic identifiers easier.
 
 
-## Extract
+## 1. Extract
 ### Load Mortality Data
 We found data on Mortality Rates in the United States from CDC.gov: https://wonder.cdc.gov/controller/datarequest/D140 We decided to export this dataset based on:
 
@@ -24,7 +23,7 @@ The 2015 Planning Database (https://www.census.gov/research/data/planning_databa
 In looking through the Census Planning Database, it did not have a state abbreviation (which some datasets use as identifiers). Wikipedia has a List of U.S. State Abbreviations (https://en.wikipedia.org/wiki/List_of_U.S._state_abbreviations) that includes the Census abbreviation along with ISO, United States Postal Code, and United States Coast Guard abbreviations. ISO 3166 is a standard published by the International Organization for Standardization (ISO) that defines codes for the names of countries, dependent territories, special areas of geographical interest, and their principal subdivisions (e.g., provinces or states). Thus, if any additional datasets have other state abbreviations, the new potential universal database can include those as well.
 
 
-## Transform
+## 2. Transform
 ### Census Planning Database
 First, we removed all of the housing and demographic data to only identify the geographic identifiers. In examining the Census Planning Database, the census block group (12-digit census identifier) was incomplete for a majority of the rows. However, the other geographic identifiers (e.g., county code, tract number, block group number) were all correct, so by adding the necessary preceding zeros when needed (e.g., turning a county code of 1 to 001), we could build to the 12-digit census block group from that data. 
 
@@ -33,7 +32,7 @@ We also created the FIPS. The Federal Information Processing Standard Publicatio
 ### Web Scraping of Wikipedia
 After using pandas to scrape the Wikipedia url, we located the appropriate table andit was not pretty. So, data munging involved dropping rows, renaming columns, dropping columns, resetting index (twice), and removing rows with extraneous data (e.g., Midway Islands, Micronesia). With the web scraping and the census planning database, we merged on full state name. From there, we removed a duplicate column and renamed another.
 
-## Load
+## 3. Load
 ### Future/Why This is Chosen
 
 With the universal census database with geographic identifiers, a wide variety of datasets can become comparable. 
