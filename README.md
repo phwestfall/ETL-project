@@ -1,9 +1,9 @@
-# ETL-project
+# ETL Project
 This project's purpose is to work with a partner to find multiple datasets or data sources and load them together for future analysis. We (Sarah & Paul) discovered a shared interest in understanding health patterns across the US, so this interest guided our search. We worked together to create a database of US mortality data and census identifiers that are easy to use together in order to look up specific data for future analyses.
 
 
 ## 1. Extract
-### Load Mortality Data
+### Mortality Data
 We found data on Mortality Rates in the United States from CDC.gov: https://wonder.cdc.gov/controller/datarequest/D140 We decided to export this dataset based on:
 
 * County code
@@ -20,6 +20,9 @@ In looking through the Census Planning Database, it did not have a state abbrevi
 
 
 ## 2. Transform
+### Mortality Data
+A lot of filtering was done manually on the CDC website to select which data we wanted to include. There was also a record limit on how much data could be downloaded at once, so it took a few tries to narrow down our selections in order to download applicable information in one file. The file was downloaded as a txt and we were able to read it into the jupyter notebook with `read_csv` separated by tabs.
+
 ### Census Planning Database
 First, we removed all of the housing and demographic data to only identify the geographic identifiers. In examining the Census Planning Database, the census block group (12-digit census identifier) was incomplete for a majority of the rows. However, the other geographic identifiers (e.g., county code, tract number, block group number) were all correct, so by adding the necessary preceding zeros when needed (e.g., turning a county code of 1 to 001), we could build to the 12-digit census block group from that data. 
 
