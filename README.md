@@ -1,9 +1,5 @@
 # ETL-project
-This project's purpose is to work with a partner to find multiple datasets or data sources and load them together for future analysis. We (Sarah & Paul) adiscovered a shared interest in understanding health patterns across the US, so this interest guided our search. 
-
-
-## Introduction
-The goal of the ETL project is to create a universal database of census identifiers to make merging between disparate datasets with different census geographic identifiers easier.
+This project's purpose is to work with a partner to find multiple datasets or data sources and load them together for future analysis. We (Sarah & Paul) discovered a shared interest in understanding health patterns across the US, so this interest guided our search. We worked together to create a database of US mortality data and census identifiers that are easy to use together in order to look up specific data for future analyses.
 
 
 ## 1. Extract
@@ -30,9 +26,11 @@ First, we removed all of the housing and demographic data to only identify the g
 We also created the FIPS. The Federal Information Processing Standard Publication 6-4 (FIPS 6-4) was a five-digit Federal Information Processing Standards code which uniquely identified counties and county equivalents in the United States, certain U.S. possessions, and certain freely associated states.We also created columns for FIPS, Census Block Group, and Census Tract with no preceding zeros because some data sources will omit the preceding zero (e.g., CDC Wonder Data drops the preceding zero). Also, some datasets when read into python or mysql will drop the zero. After getting all the data, we did some minor re-orderingof the data to make more logical sense.
 
 ### Web Scraping of Wikipedia
-After using pandas to scrape the Wikipedia url, we located the appropriate table andit was not pretty. So, data munging involved dropping rows, renaming columns, dropping columns, resetting index (twice), and removing rows with extraneous data (e.g., Midway Islands, Micronesia). With the web scraping and the census planning database, we merged on full state name. From there, we removed a duplicate column and renamed another.
+After using pandas to scrape the Wikipedia url, we located the appropriate table and it was not pretty. So, data munging involved dropping rows, renaming columns, dropping columns, resetting the index (twice), and removing rows with extraneous data (e.g., Midway Islands, Micronesia). With the web scraping and the census planning database, we merged on full state name. From there, we removed a duplicate column and renamed another.
 
 ## 3. Load
+We established a local connection to one of our mySQL databases and used a `database.to_sql` formula to load in each pandas dataset into the mongoDB. Afterwareds, we query each of the 2 large datasets loaded to check that the data was properly transferred. We chose mongoDB because it was really easy to add any type of data to the unstructured database platform. Now that all the data we extracted and cleaned is in a database, it will make things a lot simpler for future analyses when we are looking to query all sorts of data in order to understand mortality data across the nation and shed light on patterns that exist.
+
 ### Future/Why This is Chosen
 
 With the universal census database with geographic identifiers, a wide variety of datasets can become comparable. 
@@ -41,5 +39,5 @@ With the universal census database with geographic identifiers, a wide variety o
 * Census data in every way, shape, or form.
 * Federal Communications Commission data on internet speed connectivity by census tract (to help measure the digital divide between urban and rural areas).
 
-And, of course, with the CDC wonder mortality data that is based on ICD-10 codes, we can see if and where anybody died from being struck by duck, subsequent encounter (ICD-10 W61.62XD).
+And, of course, with the CDC wonder mortality data that is based on ICD-10 codes, we can see if and where anybody died from being struck by a duck, subsequent encounter (ICD-10 W61.62XD).
 
